@@ -5,7 +5,6 @@
 
 int main(int argc, char** argv) {
     std::string file;         // filename
-    std::ifstream in_file;
 
     //no file gien so take user input from the keyboard
     if (argc == 1) {
@@ -35,7 +34,7 @@ int main(int argc, char** argv) {
     // File given on the command line
     else if (argc == 2) {
         file = argv[1];
-        file += ".sp2021";
+        file += ".sp21";
 
         std::ofstream outfile;
         outfile.open(file, std::ios_base::app);

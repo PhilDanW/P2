@@ -3,7 +3,7 @@
 
 #include "token.h"
 
-struct Node {
+struct treeNode {
   
     std::string label;
     int nodeDepth;
@@ -15,12 +15,12 @@ struct Node {
     Token token5;
     Token token6;
   
-    Node* leaf1; 
-    Node* leaf2;
-    Node* leaf3;
-    Node* leaf4;
+    treeNode* leaf1; 
+    treeNode* leaf2;
+    treeNode* leaf3;
+    treeNode* leaf4;
   
-    Node() {
+    treeNode() {
       
         this->label = "";
         this->nodeDepth = 0;
@@ -37,7 +37,7 @@ struct Node {
         this->leaf4 = nullptr;
     }
   
-    Node(std::string label, int nodeDepth) {
+    treeNode(std::string label, int nodeDepth) {
           this->label = label;
           this->nodeDepth = nodeDepth;
           this->nodeDepth = 0;

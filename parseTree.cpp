@@ -1,3 +1,11 @@
+/*********************************************************
+* Author: Philip Wright                                  *
+* Project 2: Parser                                      *
+* parseTree takes the tokens from the input file or user *
+* and builds the parse tree by scanning each token       *
+* and defining the rules for the BNF in the functions    * 
+* given below. It then prints the parse tree to screen   *
+**********************************************************/
 #include "parseTree.h"
 #include "scanner.h"
 #include <iostream>

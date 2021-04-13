@@ -19,6 +19,11 @@ struct Token {
     tokens tokenID;           // token ID
     std::string token_string;  // string of token
 
+    Token(){
+        this->tokenID = ERROR_TK;
+        this->token_string = "";
+        this->lineNum = 0;
+    }
     
     // Assign token info
     Token(tokens ID, std::string string, unsigned int lineNum)

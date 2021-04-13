@@ -1,3 +1,12 @@
+/*********************************************************
+* Author: Philip Wright                                  *
+* Project 2: Parser                                      *
+* main.cpp processes the command line arguments (a file) *
+* or will take keyboard input if no file is given.       *
+* After opening the file or taking keyboard input it     * 
+* will call parser() to scan and build the parse tree    *
+**********************************************************/
+
 #include <iostream>
 #include <string>
 #include <fstream>

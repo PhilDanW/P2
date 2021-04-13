@@ -31,7 +31,7 @@ treeNode* parser() {
 
 treeNode* program() {
     int nodeDepth = 0;
-    treeNode* progNode = new treeNode("<program", nodeDepth);
+    treeNode* progNode = new treeNode("<program>", nodeDepth);
     progNode->leaf1 = vars(nodeDepth);
     if(the_token.tokenID == MAIN_KEYWORD) {
         progNode->token1 = the_token;

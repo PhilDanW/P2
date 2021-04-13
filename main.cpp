@@ -6,8 +6,19 @@
 int main(int argc, char** argv) {
     std::string file;         // filename
 
-    //no file gien so take user input from the keyboard
-    if (argc == 1) {
+    // File given on the command line
+    if (argc == 2) {
+        file = argv[1];
+        file += ".sp21";
+
+        std::ofstream outfile;
+        outfile.open(file, std::ios_base::app);
+        outfile << " ";
+        in_file.open(file);
+    }
+
+    //no file given so take user input from the keyboard
+    else if (argc == 1) {
         std::string input;
         std::ofstream tempFile;                 // TempFile for user input
         file = "stdin.temp";
@@ -28,17 +39,6 @@ int main(int argc, char** argv) {
         } while (!input.empty());         
         // close file
         tempFile.close();                   
-        in_file.open(file);
-    }
-
-    // File given on the command line
-    else if (argc == 2) {
-        file = argv[1];
-        file += ".sp21";
-
-        std::ofstream outfile;
-        outfile.open(file, std::ios_base::app);
-        outfile << " ";
         in_file.open(file);
     }
     //if there is more than one argument, quit the program

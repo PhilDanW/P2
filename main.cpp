@@ -4,63 +4,61 @@
 #include "parser.h"
 
 int main(int argc, char** argv) {
-    std::string file_name;         // filename
+    std::string file;         // filename
 
-    // FILE GIVEN
-    if (argc == 2) {
-        file_name = argv[1];
-        file_name += ".ss21";
-
-        std::ofstream outfile;
-        outfile.open(file_name, std::ios_base::app);
-        outfile << " ";
-        in_file.open(file_name);
-
-    }
-
-    // USER INPUT
-    else if (argc == 1) {
-        std::string userInput;
+    //no file gien so take user input from the keyboard
+    if (argc == 1) {
+        std::string input;
         std::ofstream tempFile;                 // TempFile for user input
-        file_name = "stdin.temp";
+        file = "stdin.temp";
 
-        tempFile.open(file_name, std::ios::trunc); // trunc overwrites
+        tempFile.open(file, std::ios::trunc); // trunc overwrites
 
         std::string string = "";                // empty string for reading input
 
-        std::cout << "Pressing \"Enter\" on empty line will simulate EOF" << std::endl;
+        std::cout << "Pressing \"Enter\" is the same as EOF" << std::endl;
 
         do {
-            std::cout << std::endl << "Keyboard Input: ";
-            getline(std::cin, userInput);   // read user input
-            tempFile << userInput << "\n";   // write input to temp file
-        } while (!userInput.empty());         // Pressing "Enter" on empty line will sim EOF
-
-        tempFile.close();                   // close file
-        in_file.open(file_name);
+            std::cout << std::endl << "Type your input here: ";
+            // read user input
+            getline(std::cin, input);  
+            // write input to temp file
+            tempFile << input << "\n";  
+        // Pressing "Enter" on empty line will sim EOF    
+        } while (!input.empty());         
+        // close file
+        tempFile.close();                   
+        in_file.open(file);
     }
 
-    //more than 1 argument quits
+    // File given on the command line
+    else if (argc == 2) {
+        file = argv[1];
+        file += ".sp2021";
+
+        std::ofstream outfile;
+        outfile.open(file, std::ios_base::app);
+        outfile << " ";
+        in_file.open(file);
+    }
+    //if there is more than one argument, quit the program
     else {
-        std::cout << "Too many arguments given" << std::endl;
+        std::cout << "Only one argument supported, you entered " << argc << "arguments." << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    
-
-    // Scan and parse file
-    if (in_file) {
-        std::cout << "Starting the parser..." << std::endl;
-        Node* root = parser(); // run parser
-        print_tree(root);      // print tree
-        
-        in_file.close(); // close file
-
-    }
-    else {  // cannot open file
-        std::cout << "ERROR: Cannot open " << file_name << " for reading" << std::endl;
+    //Try to open the file to begin the parsing process
+    if (!in_file) {
+        std::cout << "ERROR: Could not open " << file << " for reading" << std::endl;
         in_file.close();
         exit(EXIT_FAILURE);
+    }
+    //parse the tokens in the file and then print the tree to the screen
+    else { 
+        std::cout << "Beginning to build the parse tree!" << std::endl;
+        treeNode* root = parseTree(); // run parser
+        printTree(root);      // print tree
+        in_file.close(); // close file    
     }
     return 0;
 }

@@ -20,7 +20,7 @@ struct Token {
     std::string token_string;  // string of token
 
     Token(){
-        this->tokenID = ERROR_TK;
+        this->tokenID = ERROR;
         this->token_string = "";
         this->lineNum = 0;
     }

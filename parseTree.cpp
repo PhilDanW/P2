@@ -96,7 +96,7 @@ treeNode* vars(unsigned int nodeDepth) {
                             }
                       }
                       else
-                          errorSingle(INTERGER, the_token);
+                          errorSingle(INTEGER, the_token);
                 }
                 else
                     errorSingle(COLON_EQUALS_OPERATOR, the_token);
@@ -111,7 +111,7 @@ treeNode* vars(unsigned int nodeDepth) {
 treeNode* expr(unsigned int nodeDepth) {
     nodeDepth++;
     treeNode* expNode = new treeNode("<expr>", nodeDepth);
-    node->leaf1 = N(nodeDepth);
+    expNode->leaf1 = N(nodeDepth);
 
     if(the_token.tokenID == SUBTRACT_OPERATOR) {
        expNode->token1 = the_token;
@@ -124,7 +124,7 @@ treeNode* expr(unsigned int nodeDepth) {
 }
 
 treeNode* N(unsigned int nodeDepth) {
-   nodeDepth++
+   nodeDepth++;
    treeNode* nNode = new treeNode("<N>", nodeDepth);
    nNode->leaf1 = A(nodeDepth);
   
@@ -154,7 +154,7 @@ treeNode* A(unsigned int nodeDepth) {
         aNode->token1 = the_token;
         the_token = scanner(file, lineNumber);
         aNode->leaf2 = A(nodeDepth);
-        return node;
+        return aNode;
     }
     else { //4-11 fix
         return aNode;
@@ -172,7 +172,7 @@ treeNode* M(unsigned int nodeDepth)
         mNode->token1 = the_token;
         the_token = scanner(file, lineNumber); 
         mNode->leaf1 = M(nodeDepth);
-        return node;
+        return mNode;
     }
     else
     {
@@ -248,7 +248,7 @@ treeNode* stat(unsigned int nodeDepth) {
         statNode->leaf1 = In(nodeDepth);
       
         if(the_token.tokenID == SEMICOLON_DELIM) {
-            statNode->token1 = the_token
+            statNode->token1 = the_token;
             the_token = scanner(file, lineNumber);
             return statNode;
         }
@@ -372,7 +372,7 @@ treeNode* If(unsigned int nodeDepth) {
             errorSingle(LEFT_BRACKET_DELIM, the_token);
     }
     else
-        error1(LOOP_TK, the_token);
+        errorSingle(LOOP_KEYWORD, the_token);
 }
 
 treeNode* loop(unsigned int nodeDepth)
@@ -489,7 +489,7 @@ treeNode* RO(unsigned int nodeDepth)
                 errorSingle(RIGHT_BRACKET_DELIM, the_token);
         }
         else
-            errorSingle(EQUALS_EQUALS_DELIM, the_token);
+            errorSingle(EQUALS_EQUALS_OPERATOR, the_token);
     }
     else
         errorN(the_token);
@@ -533,7 +533,7 @@ treeNode* Goto(unsigned int nodeDepth)
             errorSingle(IDENTIFIER, the_token);
     }
     else
-        errorSingle(PROC_IDENTIFIER, the_token);
+        errorSingle(PROC_KEYWORD, the_token);
 }
 
 //error for single token
@@ -542,7 +542,7 @@ void errorSingle(tokens needed, Token have)
     std::cout << "ERROR" << std::endl;
     std::cout << "Needed token: " << myTokens[needed] << std::endl;
     std::cout << "But have token: " << myTokens[have.tokenID];
-    std::cout << " LINE NUMBER: " << have.lineNumber<< std::endl;
+    std::cout << " LINE NUMBER: " << have.lineNum<< std::endl;
     exit(EXIT_FAILURE);
 }
 
@@ -552,7 +552,7 @@ void errorDouble(tokens needed1, tokens needed2, Token have)
     std::cout << "ERROR" << std::endl;
     std::cout << "Needed tokens: " << myTokens[needed1] << " or " << myTokens[needed2] << std::endl;
     std::cout << "But have token: " << myTokens[have.tokenID];
-    std::cout << " LINE NUMBER: " << have.lineNumber << std::endl;
+    std::cout << " LINE NUMBER: " << have.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 
@@ -563,7 +563,7 @@ void errorTriple(tokens needed1, tokens needed2, tokens needed3, Token have)
     std::cout << "Needed tokens: " << myTokens[needed1] << ", " << myTokens[needed2];
     std::cout << ", or " << myTokens[needed3] << std::endl;
     std::cout << "But have token: " << myTokens[have.tokenID];
-    std::cout << " LINE NUMBER: " << have.lineNumber << std::endl;
+    std::cout << " LINE NUMBER: " << have.lineNum << std::endl;
     exit(EXIT_FAILURE);
 }
 // multiple tokens (4+) error
@@ -583,12 +583,12 @@ void printTree(treeNode* node)
     }
     else
     {
-        std::string str((node->depth * 2), ' ');
+        std::string str((node->nodeDepth * 2), ' ');
         std::cout << str;
-        std::cout << node->name << "  ";
+        std::cout << node->label << "  ";
         std::cout << node->token1.token_string << " " << node->token2.token_string << " " << node->token3.token_string << " " << node->token4.token_string << " " << node->token5.token_string << " " << node->token6.token_string << std::endl;
 
-        if(node->;leaf1 != nullptr)
+        if(node->leaf1 != nullptr)
             printTree(node->leaf1);
         if(node->leaf2 != nullptr)
             printTree(node->leaf2);

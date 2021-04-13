@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
     //parse the tokens in the file and then print the tree to the screen
     else { 
         std::cout << "Beginning to build the parse tree!" << std::endl;
-        treeNode* root = parseTree(); // run parser
+        treeNode* root = parser(); // run parser
         printTree(root);      // print tree
         in_file.close(); // close file    
     }

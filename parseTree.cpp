@@ -2,7 +2,7 @@
 #include "scanner.h"
 #include <iostream>
 
-std::ifstream file;
+std::ifstream in_file;
 unsigned int lineNumber = 1;
 Token the_token;
 

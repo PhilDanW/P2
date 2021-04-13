@@ -1,3 +1,8 @@
+/*********************************************************
+* Author: Philip Wright                                  *
+* Project 2: Parser                                      *
+* treeNode.h has the definition of the treeNode struct   *
+*********************************************************/
 #ifndef TREENODE_H
 #define TREENODE_H
 
@@ -5,6 +10,7 @@
 
 struct treeNode {
   
+    //class variable definitions
     std::string label;
     int nodeDepth;
     
@@ -20,6 +26,7 @@ struct treeNode {
     treeNode* leaf3;
     treeNode* leaf4;
   
+    //class contructor
     treeNode() {
       
         this->label = "";
@@ -37,6 +44,7 @@ struct treeNode {
         this->leaf4 = nullptr;
     }
   
+    //class contructor definition
     treeNode(std::string label, int nodeDepth) {
           this->label = label;
           this->nodeDepth = nodeDepth;

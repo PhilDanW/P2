@@ -5,6 +5,10 @@ Project: The Parser
 Class: CMPSCI 4280-002
 Completion Date: April 12, 2021
 
+Got my Scanner to function properly for the Parser.
+For my scanner project it would compile but gave a segmentation fault when ran.
+This is the part where I ask for some missed points on my P1 project!
+
 Program Instructions:
 To make executable type:
         make

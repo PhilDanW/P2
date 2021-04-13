@@ -5,6 +5,7 @@
 
 int main(int argc, char** argv) {
     std::string file;         // filename
+    std::ifstream in_file;
 
     //no file gien so take user input from the keyboard
     if (argc == 1) {

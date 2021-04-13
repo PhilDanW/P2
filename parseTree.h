@@ -3,7 +3,7 @@
 #include "token.h"
 #include "treeNode.h"
 
-extern std::ifstream inputFile;
+extern std::ifstream in_file;
 
 treeNode* parser();
 treeNode* program();

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "parser.h"
+#include "parseTree.h"
 
 int main(int argc, char** argv) {
     std::string file;         // filename

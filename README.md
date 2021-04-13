@@ -11,7 +11,7 @@ To make executable type:
 To clean the directory type:
         make clean
 To run the executable there are 2 ways:
-        1. ./parser
+        1. ./parser\n
         -this option allows for the user to input code instead of giving a file
         2. ./parser [filename]
         -this option allows the user to specify a file

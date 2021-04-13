@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
         } while (!input.empty());         
         // close file
         tempFile.close();                   
-        in_file.open(file);
+        inputFile.open(file);
     }
 
     // File given on the command line
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
         std::ofstream outfile;
         outfile.open(file, std::ios_base::app);
         outfile << " ";
-        in_file.open(file);
+        inputFile.open(file);
     }
     //if there is more than one argument, quit the program
     else {
@@ -48,9 +48,9 @@ int main(int argc, char** argv) {
     }
 
     //Try to open the file to begin the parsing process
-    if (!in_file) {
+    if (!inputFile) {
         std::cout << "ERROR: Could not open " << file << " for reading" << std::endl;
-        in_file.close();
+        inputFile.close();
         exit(EXIT_FAILURE);
     }
     //parse the tokens in the file and then print the tree to the screen
@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
         std::cout << "Beginning to build the parse tree!" << std::endl;
         treeNode* root = parser(); // run parser
         printTree(root);      // print tree
-        in_file.close(); // close file    
+        inputFile.close(); // close file    
     }
     return 0;
 }

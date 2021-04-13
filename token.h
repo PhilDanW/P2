@@ -16,7 +16,7 @@ enum tokens {
 
 struct Token {
     unsigned int lineNum;      // line number
-    tokens token_ID;           // token ID
+    tokens tokenID;           // token ID
     std::string token_string;  // string of token
 
     

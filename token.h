@@ -24,7 +24,7 @@ struct Token {
     Token(tokens ID, std::string string, unsigned int lineNum)
     {   
         this->lineNum = lineNum;
-        this->token_ID = ID;
+        this->tokenID = ID;
         this->token_string = string;
     }
 };

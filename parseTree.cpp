@@ -583,8 +583,8 @@ void printTree(treeNode* node)
     }
     else
     {
-        std::string str((node->nodeDepth * 2), ' ');
-        std::cout << str;
+        std::string treeSpace((node->nodeDepth * 2), ' ');
+        std::cout << treeSpace;
         std::cout << node->label << "  ";
         std::cout << node->token1.token_string << " " << node->token2.token_string << " " << node->token3.token_string << " " << node->token4.token_string << " " << node->token5.token_string << " " << node->token6.token_string << std::endl;
 

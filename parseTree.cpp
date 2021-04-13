@@ -480,7 +480,7 @@ treeNode* RO(unsigned int nodeDepth)
         if (the_token.tokenID == EQUALS_EQUALS_OPERATOR)
         {
             roNode->token2 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             if (the_token.tokenID == RIGHT_BRACKET_DELIM)
             {
                 // take any 3 tokens

@@ -1,6 +1,6 @@
 /***********************************************************
 * Author: Philip Wright                                    *
-* Project 2: Parser                                       *
+* Project 2: Parser                                        *
 * scanner.h holds function definitions for scanner.cpp     *
 ***********************************************************/
 #ifndef SCANNER_H

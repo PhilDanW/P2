@@ -18,7 +18,7 @@ std::string myTokens[] = {"BEGIN_KEYWORD","END_KEYWORD","LOOP_KEYWORD","WHILE_KE
 
 treeNode* parser() {
     treeNode* rootNode;
-    the_token = scanner(file, lineNumber);
+    the_token = scanner(inputFile, lineNumber);
   
     rootNode = program();
     if(the_token.tokenID == EOF_TOKEN) {
@@ -35,7 +35,7 @@ treeNode* program() {
     progNode->leaf1 = vars(nodeDepth);
     if(the_token.tokenID == MAIN_KEYWORD) {
         progNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         progNode->leaf2 = block(nodeDepth);
     }
     else
@@ -48,13 +48,13 @@ treeNode* block(unsigned int nodeDepth) {
     treeNode* blockNode = new treeNode("<block>", nodeDepth);
     if(the_token.tokenID == BEGIN_KEYWORD) {
         blockNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         blockNode->leaf1 = vars(nodeDepth);
         blockNode->leaf2 = stats(nodeDepth);
       
         if(the_token.tokenID == END_KEYWORD) {
             blockNode->token2 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return blockNode;
         }
         else
@@ -71,23 +71,23 @@ treeNode* vars(unsigned int nodeDepth) {
     if(the_token.tokenID == DATA_KEYWORD) 
     {
           varNode->token1 = the_token;
-          the_token = scanner(file, lineNumber);
+          the_token = scanner(inputFile, lineNumber);
           if (the_token.tokenID == IDENTIFIER) 
           {
                 varNode->token2 = the_token;
-                the_token = scanner(file, lineNumber);
+                the_token = scanner(inputFile, lineNumber);
                 if (the_token.tokenID == COLON_EQUALS_OPERATOR)
                 {
                       varNode->token3 = the_token;
-                      the_token = scanner(file, lineNumber);
+                      the_token = scanner(inputFile, lineNumber);
                       if (the_token.tokenID == INTEGER)
                       {
                             varNode->token4 = the_token;
-                            the_token = scanner(file, lineNumber);
+                            the_token = scanner(inputFile, lineNumber);
                             if (the_token.tokenID == SEMICOLON_DELIM)
                             {
                                   varNode->token5 = the_token;
-                                  the_token = scanner(file, lineNumber);
+                                  the_token = scanner(inputFile, lineNumber);
                                   varNode->leaf1 = vars(nodeDepth);
                                   return varNode;
                             }
@@ -115,7 +115,7 @@ treeNode* expr(unsigned int nodeDepth) {
 
     if(the_token.tokenID == SUBTRACT_OPERATOR) {
        expNode->token1 = the_token;
-       the_token = scanner(file, lineNumber);
+       the_token = scanner(inputFile, lineNumber);
        expNode->leaf2 = expr(nodeDepth);
        return expNode;
     }
@@ -130,13 +130,13 @@ treeNode* N(unsigned int nodeDepth) {
   
    if(the_token.tokenID == DIVIDE_OPERATOR) {
       nNode->token1 = the_token;
-      the_token = scanner(file, lineNumber);
+      the_token = scanner(inputFile, lineNumber);
       nNode->leaf2 = N(nodeDepth);
       return nNode;
    }
    else if (the_token.tokenID == ASTERISK_OPERATOR) {
      nNode->token1 = the_token;
-     the_token = scanner(file, lineNumber);
+     the_token = scanner(inputFile, lineNumber);
      nNode->leaf2 = N(nodeDepth);
      return nNode;
    }
@@ -152,7 +152,7 @@ treeNode* A(unsigned int nodeDepth) {
     {
         /* store operator */
         aNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         aNode->leaf2 = A(nodeDepth);
         return aNode;
     }
@@ -170,7 +170,7 @@ treeNode* M(unsigned int nodeDepth)
     {
         /* strore operator */
         mNode->token1 = the_token;
-        the_token = scanner(file, lineNumber); 
+        the_token = scanner(inputFile, lineNumber); 
         mNode->leaf1 = M(nodeDepth);
         return mNode;
     }
@@ -185,17 +185,17 @@ treeNode* R(unsigned int nodeDepth)
 {
     nodeDepth++;
     treeNode* rNode = new treeNode("<R>", nodeDepth);
-    //tk = scanner(in_file, lineNum);
+  
     if (the_token.tokenID == LEFT_PARENT_DELIM)
     {
         rNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         rNode->leaf1 = expr(nodeDepth);
         
         if (the_token.tokenID == RIGHT_PARENT_DELIM)
         {
             rNode->token2 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return rNode;
         }
         else
@@ -204,13 +204,13 @@ treeNode* R(unsigned int nodeDepth)
     else if (the_token.tokenID == IDENTIFIER)
     {
         rNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         return rNode;
     }
     else if (the_token.tokenID == INTEGER)
     {
         rNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         return rNode;
     }
     else
@@ -249,7 +249,7 @@ treeNode* stat(unsigned int nodeDepth) {
       
         if(the_token.tokenID == SEMICOLON_DELIM) {
             statNode->token1 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return statNode;
         }
         else
@@ -260,7 +260,7 @@ treeNode* stat(unsigned int nodeDepth) {
         
         if(the_token.tokenID == SEMICOLON_DELIM) {
             statNode->token1 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return statNode;
         }
         else
@@ -275,7 +275,7 @@ treeNode* stat(unsigned int nodeDepth) {
           
         if(the_token.tokenID == SEMICOLON_DELIM) { 
             statNode->token1 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return statNode;
         }
         else
@@ -286,7 +286,7 @@ treeNode* stat(unsigned int nodeDepth) {
       
         if(the_token.tokenID == SEMICOLON_DELIM) {
             statNode->token1 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return statNode;
         }
         else
@@ -297,7 +297,7 @@ treeNode* stat(unsigned int nodeDepth) {
         
         if(the_token.tokenID == SEMICOLON_DELIM) {
             statNode->token1 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return statNode;
         }
         else
@@ -311,11 +311,11 @@ treeNode* In(unsigned int nodeDepth) {
     nodeDepth++;
     treeNode* inNode = new treeNode("<in>", nodeDepth);
     if(the_token.tokenID == GETTER_KEYWORD) {
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         
         if(the_token.tokenID == IDENTIFIER) {
             inNode->token1 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return inNode;
         }
         else
@@ -330,7 +330,7 @@ treeNode* Out(unsigned int nodeDepth) {
     treeNode* outNode = new treeNode("<out>", nodeDepth);
   
     if(the_token.tokenID == OUTTER_KEYWORD) {
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         outNode->leaf1 = expr(nodeDepth);
         return outNode;
     }
@@ -344,11 +344,11 @@ treeNode* If(unsigned int nodeDepth) {
     if (the_token.tokenID == IF_KEYWORD)
     {
         ifNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         if (the_token.tokenID == LEFT_BRACKET_DELIM)
         {
             ifNode->token2 = the_token;
-            the_token = scanner(file, lineNumber); 
+            the_token = scanner(inputFile, lineNumber); 
             ifNode->leaf1 = expr(nodeDepth);
             ifNode->leaf2 = RO(nodeDepth);
             ifNode->leaf3 = expr(nodeDepth);
@@ -358,7 +358,7 @@ treeNode* If(unsigned int nodeDepth) {
                 if (the_token.tokenID == THEN_KEYWORD)
                 {
                     ifNode->token4 = the_token;
-                    the_token = scanner(file, lineNumber); 
+                    the_token = scanner(inputFile, lineNumber); 
                     ifNode->leaf4 = stat(nodeDepth);
                     return ifNode;
                 }
@@ -382,18 +382,18 @@ treeNode* loop(unsigned int nodeDepth)
     if(the_token.tokenID == LOOP_KEYWORD)
     {
         loopNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         if(the_token.tokenID == LEFT_BRACKET_DELIM)
         {
             loopNode->token2 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             loopNode->leaf1 = expr(nodeDepth);
             loopNode->leaf2 = RO(nodeDepth);
             loopNode->leaf3 = expr(nodeDepth);
             if(the_token.tokenID == RIGHT_BRACKET_DELIM)
             {
                 loopNode->token3 = the_token;
-                the_token = scanner(file, lineNumber);
+                the_token = scanner(inputFile, lineNumber);
                 loopNode->leaf4 = stat(nodeDepth);
                 return loopNode;
             }
@@ -411,17 +411,17 @@ treeNode* assign(unsigned int nodeDepth)
 {
     nodeDepth++;
     treeNode* assignNode = new treeNode("<assign>", nodeDepth);
-    //tk = scanner(in_file, lineNum);
+    
     if (the_token.tokenID == ASSIGN_KEYWORD)
     {
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         if (the_token.tokenID == IDENTIFIER)
         {
             assignNode->token1 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             if (the_token.tokenID == COLON_EQUALS_OPERATOR)
             {
-                the_token = scanner(file, lineNumber);
+                the_token = scanner(inputFile, lineNumber);
                 assignNode->leaf1 = expr(nodeDepth);
                 return assignNode;
             }
@@ -443,32 +443,32 @@ treeNode* RO(unsigned int nodeDepth)
     if (the_token.tokenID == EQUALS_LESS_OPERATOR)
     {
         roNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         return roNode;
     }
 
     else if (the_token.tokenID == EQUALS_GREATER_OPERATOR)
     {
         roNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         return roNode;
     }
     else if (the_token.tokenID == EQUALS_EQUALS_OPERATOR)
     {
         roNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         return roNode;
     }
     else if (the_token.tokenID == DIVIDE_OPERATOR)
     {
         roNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         return roNode;
     }
     else if (the_token.tokenID == LEFT_BRACKET_DELIM)
     {
         roNode->token1 = the_token;
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         if (the_token.tokenID == EQUALS_EQUALS_OPERATOR)
         {
             roNode->token2 = the_token;
@@ -477,11 +477,11 @@ treeNode* RO(unsigned int nodeDepth)
             {
                 // take any 3 tokens
                 roNode->token3 = the_token;
-                the_token = scanner(file, lineNumber); 
+                the_token = scanner(inputFile, lineNumber); 
                 roNode->token4 = the_token;
-                the_token = scanner(file, lineNumber);
+                the_token = scanner(inputFile, lineNumber);
                 roNode->token5 = the_token;
-                the_token = scanner(file, lineNumber);
+                the_token = scanner(inputFile, lineNumber);
                 roNode->token6 = the_token;
                 return roNode;
             }
@@ -501,11 +501,11 @@ treeNode* label(unsigned int nodeDepth)
     treeNode* labelNode = new treeNode("<label>", nodeDepth);
     if (the_token.tokenID == VOID_KEYWORD)
     {
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         if (the_token.tokenID == IDENTIFIER)
         {
             labelNode->token1 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return labelNode;
 
         }
@@ -522,11 +522,11 @@ treeNode* Goto(unsigned int nodeDepth)
     treeNode* gtNode = new treeNode("<goto>", nodeDepth);
     if (the_token.tokenID == PROC_KEYWORD)
     {
-        the_token = scanner(file, lineNumber);
+        the_token = scanner(inputFile, lineNumber);
         if (the_token.tokenID == IDENTIFIER)
         {
             gtNode->token1 = the_token;
-            the_token = scanner(file, lineNumber);
+            the_token = scanner(inputFile, lineNumber);
             return gtNode;
         }
         else

@@ -26,12 +26,12 @@ treeNode* RO(unsigned int nodeDepth);
 treeNode* label(unsigned int nodeDepth);
 treeNode* Goto(unsigned int nodeDepth);
 
-void error1(tokens needed, Token current);
-void error2(tokens needed1, tokens needed2, Token current);
-void error3(tokens needed1, tokens needed2, tokens needed3, Token current);
+void errorSingle(tokens needed, Token have);
+void errorDouble(tokens needed1, tokens needed2, Token have);
+void errorTriple(tokens needed1, tokens needed2, tokens needed3, Token have);
 void errorN(Token current);
 
-void printTree(Node* node);
+void printTree(treeNode* node);
 
 #endif
 

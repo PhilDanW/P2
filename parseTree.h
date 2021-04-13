@@ -1,3 +1,9 @@
+/*********************************************************
+* Author: Philip Wright                                  *
+* Project 2: Parse r                                     *
+* parseTree.h holds the function definitions of          *
+* parseTree.cpp                                          *
+**********************************************************/
 #ifndef PARSETREE_H
 #define PARSETREE_H
 #include "token.h"

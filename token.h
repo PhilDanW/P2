@@ -1,3 +1,9 @@
+/*********************************************************
+* Author: Philip Wright                                  *
+* Project 2: Parser                                      *
+* token.h has the enum values or the token types as well *
+* as the struct definition of the Token type             *
+*********************************************************/
 #ifndef TOKEN_H
 #define TOKEN_H
 
